@@ -1,11 +1,12 @@
 import { PrismaClient } from '@prisma/client';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
+import { Task } from '../entities/Task';
 
 export class TaskRepository {
   constructor(private readonly prisma: PrismaClient) {}
 
-  async create(dto: CreateTaskDto) {
+  async create(dto: CreateTaskDto): Promise<Task> {
     const { title, text, color, isFavorite } = dto;
     const createdTask = await this.prisma.task.create({
       data: {
@@ -19,17 +20,17 @@ export class TaskRepository {
     return createdTask;
   }
 
-  async findById(id: string) {
-    const task = await this.prisma.task.findUnique({ where: { id } });
+  async findById(id: string): Promise<Task> {
+    const task = await this.prisma.task.findUniqueOrThrow({ where: { id } });
     return task;
   }
 
-  async findAll() {
+  async findAll(): Promise<Task[]> {
     const tasks = await this.prisma.task.findMany();
     return tasks;
   }
 
-  async update(id: string, dto: UpdateTaskDto) {
+  async update(id: string, dto: UpdateTaskDto): Promise<Task> {
     const { title, text, color, isFavorite } = dto;
     const updatedTask = await this.prisma.task.update({
       where: { id },
@@ -48,7 +49,7 @@ export class TaskRepository {
     await this.prisma.task.delete({ where: { id } });
   }
 
-  async addTaskToFavorites(id: string) {
+  async addTaskToFavorites(id: string): Promise<Task> {
     const favoriteTask = await this.prisma.task.update({
       where: { id },
       data: {
@@ -59,7 +60,7 @@ export class TaskRepository {
     return favoriteTask;
   }
 
-  async removeTaskFromFavorites(id: string) {
+  async removeTaskFromFavorites(id: string): Promise<Task> {
     const task = await this.prisma.task.update({
       where: { id },
       data: {
