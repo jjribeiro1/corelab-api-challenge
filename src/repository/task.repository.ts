@@ -1,5 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { CreateTaskDto } from '../dto/create-task.dto';
+import { UpdateTaskDto } from '../dto/update-task.dto';
 
 export class TaskRepository {
   constructor(private readonly prisma: PrismaClient) {}
@@ -26,5 +27,20 @@ export class TaskRepository {
   async findAll() {
     const tasks = await this.prisma.task.findMany();
     return tasks;
+  }
+
+  async update(id: string, dto: UpdateTaskDto) {
+    const { title, text, color, isFavorite } = dto;
+    const updatedTask = await this.prisma.task.update({
+      where: { id },
+      data: {
+        title,
+        text,
+        color,
+        isFavorite,
+      },
+    });
+
+    return updatedTask;
   }
 }
