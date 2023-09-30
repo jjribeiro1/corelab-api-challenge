@@ -43,4 +43,8 @@ export class TaskRepository {
 
     return updatedTask;
   }
+
+  async remove(id: string) {
+    await this.prisma.task.delete({ where: { id } });
+  }
 }
