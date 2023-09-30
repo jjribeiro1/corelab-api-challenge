@@ -1,11 +1,13 @@
 import express from 'express';
 import { setupConfig } from './config';
+import { router } from './routes';
 
 const app = express();
 const port = 3000;
 
 setupConfig(app);
+app.use(router)
 
-app.listen(() => {
+app.listen(port, () => {
   console.log(`server listen on http://localhost:${port}`);
 });
