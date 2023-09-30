@@ -58,4 +58,15 @@ export class TaskRepository {
 
     return favoriteTask;
   }
+
+  async removeTaskFromFavorites(id: string) {
+    const task = await this.prisma.task.update({
+      where: { id },
+      data: {
+        isFavorite: false,
+      },
+    });
+
+    return task;
+  }
 }
