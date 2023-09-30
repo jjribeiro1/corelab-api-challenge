@@ -1,1 +1,5 @@
 build
+package.json
+package-lock.json
+.prettierrc
+tsconfig.json
