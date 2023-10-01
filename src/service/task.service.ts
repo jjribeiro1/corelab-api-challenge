@@ -1,5 +1,6 @@
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { UpdateTaskDto } from '../dto/update-task.dto';
+import { Exception, ExceptionOption } from '../exceptions/exception';
 import { TaskRepository } from '../repository/task.repository';
 
 export class TaskService {
@@ -12,7 +13,7 @@ export class TaskService {
   async findById(id: string) {
     const task = await this.repository.findById(id);
     if (!task) {
-      throw new Error(`task with id: ${id} not found`);
+      throw new Exception(ExceptionOption.NOT_FOUND);
     }
     return task;
   }

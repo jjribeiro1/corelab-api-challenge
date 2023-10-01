@@ -20,8 +20,8 @@ export class TaskRepository {
     return createdTask;
   }
 
-  async findById(id: string): Promise<Task> {
-    const task = await this.prisma.task.findUniqueOrThrow({ where: { id } });
+  async findById(id: string): Promise<Task | null> {
+    const task = await this.prisma.task.findUnique({ where: { id } });
     return task;
   }
 

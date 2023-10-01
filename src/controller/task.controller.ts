@@ -2,6 +2,8 @@ import { Request, Response } from 'express';
 import { CreateTaskDto } from '../dto/create-task.dto';
 import { TaskService } from '../service/task.service';
 import { UpdateTaskDto } from '../dto/update-task.dto';
+import { Exception } from '../exceptions/exception';
+import { ExceptionHandler } from '../exceptions/exception-handler';
 
 export class TaskController {
   constructor(private readonly service: TaskService) {}
@@ -31,7 +33,12 @@ export class TaskController {
       const task = await this.service.findById(id);
       return res.status(200).json(task);
     } catch (error) {
-      res.status(500).json(error);
+      if (error instanceof Exception) {
+        const { statusCode, message } = ExceptionHandler.execute(error);
+        return res.status(statusCode).json({ message });
+      }
+
+      res.sendStatus(500);
     }
   };
 
