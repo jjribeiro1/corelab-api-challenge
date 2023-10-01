@@ -14,4 +14,13 @@ export class TaskController {
       res.status(500).json(error);
     }
   }
+
+  async findAll(req: Request, res: Response) {
+    try {
+      const tasks = await this.service.findAll();
+      return res.status(200).json(tasks);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 }
