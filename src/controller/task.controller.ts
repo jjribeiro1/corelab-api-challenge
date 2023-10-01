@@ -23,4 +23,14 @@ export class TaskController {
       res.status(500).json(error);
     }
   }
+
+  async findById(req: Request, res: Response) {
+    try {
+      const id = req.params.id
+      const task = await this.service.findById(id);
+      return res.status(200).json(task);
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 }

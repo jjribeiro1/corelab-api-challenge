@@ -6,3 +6,5 @@ const { validateTaskDto, taskController } = makeTaskController();
 
 router.post('/tasks', validateTaskDto.handler, taskController.create.bind(taskController));
 router.get('/tasks', taskController.findAll.bind(taskController));
+router.get('/tasks/:id', taskController.findById.bind(taskController));
+
