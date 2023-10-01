@@ -5,7 +5,7 @@ import { UpdateTaskDto } from '../dto/update-task.dto';
 
 export class ValidateTaskDto {
   async handler(req: Request, res: Response, next: NextFunction) {
-    const body: any = req.body;
+    const body = req.body;
 
     if (req.method === 'POST') {
       const dto = new CreateTaskDto();

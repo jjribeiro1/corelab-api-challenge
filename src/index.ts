@@ -6,7 +6,7 @@ const app = express();
 const port = 3000;
 
 setupConfig(app);
-app.use(router)
+app.use(router);
 
 app.listen(port, () => {
   console.log(`server listen on http://localhost:${port}`);
