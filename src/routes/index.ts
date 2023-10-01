@@ -9,3 +9,5 @@ router.get('/tasks', taskController.findAll);
 router.get('/tasks/:id', taskController.findById);
 router.patch('/tasks/:id', validateTaskDto.handler, taskController.update);
 router.delete('/tasks/:id', taskController.remove);
+router.patch('/tasks/:id/favorite', taskController.addTaskToFavorites);
+router.patch('/tasks/:id/unfavorite', taskController.removeTaskFromFavorites);

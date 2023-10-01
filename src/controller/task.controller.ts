@@ -62,4 +62,34 @@ export class TaskController {
       res.status(500).json(error);
     }
   };
+
+  addTaskToFavorites = async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id;
+      const favoriteTask = await this.service.addTaskToFavorites(id);
+      return res.status(200).json(favoriteTask);
+    } catch (error) {
+      if (error instanceof Exception) {
+        const { statusCode, message } = ExceptionHandler.execute(error);
+        return res.status(statusCode).json({ message });
+      }
+
+      res.sendStatus(500);
+    }
+  };
+
+  removeTaskFromFavorites = async (req: Request, res: Response) => {
+    try {
+      const id = req.params.id;
+      const unfavoriteTask = await this.service.removeTaskFromFavorites(id);
+      return res.status(200).json(unfavoriteTask);
+    } catch (error) {
+      if (error instanceof Exception) {
+        const { statusCode, message } = ExceptionHandler.execute(error);
+        return res.status(statusCode).json({ message });
+      }
+
+      res.sendStatus(500);
+    }
+  };
 }
