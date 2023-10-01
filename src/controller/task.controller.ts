@@ -6,7 +6,7 @@ import { UpdateTaskDto } from '../dto/update-task.dto';
 export class TaskController {
   constructor(private readonly service: TaskService) {}
 
-  async create(req: Request, res: Response) {
+  create = async (req: Request, res: Response) => {
     try {
       const body: CreateTaskDto = req.body;
       const task = await this.service.create(body);
@@ -14,18 +14,18 @@ export class TaskController {
     } catch (error) {
       res.status(500).json(error);
     }
-  }
+  };
 
-  async findAll(req: Request, res: Response) {
+  findAll = async (req: Request, res: Response) => {
     try {
       const tasks = await this.service.findAll();
       return res.status(200).json(tasks);
     } catch (error) {
       res.status(500).json(error);
     }
-  }
+  };
 
-  async findById(req: Request, res: Response) {
+  findById = async (req: Request, res: Response) => {
     try {
       const id = req.params.id;
       const task = await this.service.findById(id);
@@ -33,9 +33,9 @@ export class TaskController {
     } catch (error) {
       res.status(500).json(error);
     }
-  }
+  };
 
-  async update(req: Request, res: Response) {
+  update = async (req: Request, res: Response) => {
     try {
       const id = req.params.id;
       const body: UpdateTaskDto = req.body;
@@ -44,15 +44,15 @@ export class TaskController {
     } catch (error) {
       res.status(500).json(error);
     }
-  }
+  };
 
-  async remove(req: Request, res: Response) {
+  remove = async (req: Request, res: Response) => {
     try {
       const id = req.params.id;
       await this.service.remove(id);
-      return res.sendStatus(204)
+      return res.sendStatus(204);
     } catch (error) {
       res.status(500).json(error);
     }
-  }
+  };
 }
