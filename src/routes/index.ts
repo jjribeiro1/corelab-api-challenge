@@ -8,5 +8,7 @@ router.post('/tasks', validateTaskDto.handler, taskController.create.bind(taskCo
 router.get('/tasks', taskController.findAll.bind(taskController));
 router.get('/tasks/:id', taskController.findById.bind(taskController));
 router.patch('/tasks/:id', validateTaskDto.handler, taskController.update.bind(taskController));
+router.delete('/tasks/:id', taskController.remove.bind(taskController));
+
 
 

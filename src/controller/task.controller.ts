@@ -45,4 +45,14 @@ export class TaskController {
       res.status(500).json(error);
     }
   }
+
+  async remove(req: Request, res: Response) {
+    try {
+      const id = req.params.id;
+      await this.service.remove(id);
+      return res.sendStatus(204)
+    } catch (error) {
+      res.status(500).json(error);
+    }
+  }
 }
