@@ -3,11 +3,11 @@ import { setupConfig } from './config';
 import { router } from './routes';
 
 const app = express();
-const port = 3000;
+const port = 3000 || process.env.PORT;
 
 setupConfig(app);
 app.use(router);
 
 app.listen(port, () => {
-  console.log(`server listen on http://localhost:${port}`);
+  console.log(`server listen on port:${port}`);
 });
