@@ -18,8 +18,8 @@ export class TaskService {
     return task;
   }
 
-  async findAll() {
-    return await this.repository.findAll();
+  async findAll(title?: string) {
+    return await this.repository.findAll(title);
   }
 
   async update(id: string, dto: UpdateTaskDto) {

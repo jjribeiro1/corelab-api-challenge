@@ -25,8 +25,13 @@ export class TaskRepository {
     return task;
   }
 
-  async findAll(): Promise<Task[]> {
+  async findAll(title?: string): Promise<Task[]> {
     const tasks = await this.prisma.task.findMany({
+      where: {
+        title: {
+          contains: title,
+        },
+      },
       orderBy: {
         createdAt: 'desc',
       },

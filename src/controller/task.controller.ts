@@ -20,7 +20,8 @@ export class TaskController {
 
   findAll = async (req: Request, res: Response) => {
     try {
-      const tasks = await this.service.findAll();
+      const titleQuery = req.query.title as string;
+      const tasks = await this.service.findAll(titleQuery);
       return res.status(200).json(tasks);
     } catch (error) {
       res.status(500).json(error);
