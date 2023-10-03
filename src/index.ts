@@ -3,7 +3,7 @@ import { setupConfig } from './config';
 import { router } from './routes';
 
 const app = express();
-const port = 3000 || process.env.PORT;
+const port = process.env.PORT || 3000;
 
 setupConfig(app);
 app.use(router);
