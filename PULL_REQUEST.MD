@@ -41,6 +41,9 @@ Rode o projeto com:
 - Controller responsável por enviar a resposta ou mensagens de erros e status code adequados para o usuário.
 - Service para fazer validações.
 - Repositório responsável por acessar o banco de dados.
+- Talvez a resposta da api demore um pouco no início por motivos de: FREE TIER DO RENDER que ativa um sleep depois de um certo tempo de inatividade
+
+
 ## Demonstração
 
 Voce pode ver a versão em produção do projeto completo
